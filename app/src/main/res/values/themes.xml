@@ -1,0 +1,5 @@
+<resources>
+    <style name="Theme.WeatherApplication" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/teal_600</item>
+    </style>
+</resources>
