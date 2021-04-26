@@ -310,36 +310,3 @@ fun DetailsScreen(
         }
     }
 }
-
-@Preview
-@Composable
-fun PreviewDetailsScreen() {
-    DetailsScreen(
-        weather = Weather(
-            woeId = 1,
-            title = "London",
-            lattLong = "-8000, 0099",
-            timezone = "Europe",
-            time = "24T16:45:19.",
-            sunRise = "24T16:45:19.",
-            sunSet =  "24T16:45:19.",
-            consolidated = listOf(
-                Weather.ConsolidatedWeather(
-                    stateName = "Heavy cloud",
-                    stateAbbr = "HC",
-                    windDirection = "NW",
-                    windSpeed = 54.2F,
-                    date = "24.05.2018",
-                    minTemp = -4F,
-                    maxTemp = 4F,
-                    currTemp = 2F,
-                    airPressure = 56F,
-                    humidity = 45F
-                )
-            )
-        ),
-        isFavorite = { flowOf(true) },
-        onInsertItem = {},
-        onDeleteItem = {}
-    )
-}

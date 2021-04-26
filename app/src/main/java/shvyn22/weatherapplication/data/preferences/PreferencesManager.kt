@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
-data class Prefs(val nightMode: Boolean)
 
 @Singleton
 class PreferencesManager @Inject constructor(
@@ -17,7 +16,7 @@ class PreferencesManager @Inject constructor(
 
     val preferencesFlow = dataStore.data.map {
         val nightMode = it[PreferencesKeys.NIGHT_MODE] ?: false
-        Prefs(nightMode)
+       nightMode
     }
 
     suspend fun editNightMode(nightMode: Boolean) {

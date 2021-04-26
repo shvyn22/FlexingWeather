@@ -43,16 +43,3 @@ fun LocationItem(
         }
     }
 }
-
-@Preview
-@Composable
-fun PreviewLocationItem() {
-    LocationItem(
-        item = Location(
-            woeId = 1,
-            title = "Lol",
-            lattLong = "-89, 101"
-        ),
-        onClick = {}
-    )
-}

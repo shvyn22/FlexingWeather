@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,18 +21,16 @@ class MainActivity : AppCompatActivity() {
     @ExperimentalComposeUiApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        lifecycleScope.launchWhenCreated {
-            mainViewModel.prefs.collect {
-                setContent {
-                    WeatherTheme(
-                        isDarkMode = it.nightMode
-                    ) {
-                        MainScreen(
-                            mainViewModel = mainViewModel,
-                            it.nightMode
-                        )
-                    }
-                }
+        setContent {
+            val themeState = mainViewModel.prefs.collectAsState(initial = false)
+            val theme by remember { themeState }
+            WeatherTheme(
+                isDarkMode = theme
+            ) {
+                MainScreen(
+                    mainViewModel = mainViewModel,
+                    darkMode = theme
+                )
             }
         }
     }
