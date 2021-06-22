@@ -9,13 +9,16 @@ data class Weather(
     @SerializedName("woeid")
     val woeId: Int,
 
+    @SerializedName("title")
     val title: String,
 
     @SerializedName("latt_long")
     val lattLong: String,
 
+    @SerializedName("timezone")
     val timezone: String,
 
+    @SerializedName("time")
     val time: String,
 
     @SerializedName("sun_rise")

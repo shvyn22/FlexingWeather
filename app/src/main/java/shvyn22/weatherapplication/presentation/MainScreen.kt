@@ -21,6 +21,7 @@ fun MainScreen(
     darkMode: Boolean
 ) {
     val navController = rememberNavController()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -29,7 +30,8 @@ fun MainScreen(
                     IconButton(
                         onClick = {
                             mainViewModel.onToggleMode(!darkMode)
-                        }) {
+                        }
+                    ) {
                         Icon(
                             imageVector = if (darkMode) Icons.Filled.LightMode
                             else Icons.Filled.DarkMode,

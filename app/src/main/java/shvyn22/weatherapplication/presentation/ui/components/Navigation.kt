@@ -12,7 +12,7 @@ import shvyn22.weatherapplication.presentation.details.DetailsScreen
 
 enum class Routes(val route: String) {
     Browse("browse"),
-    Details("details/{weather}")
+    Details("details")
 }
 
 @ExperimentalComposeUiApi
@@ -42,13 +42,15 @@ fun NavigationConfig(
         composable(
             route = Routes.Details.route
         ) {
-            DetailsScreen(
-                weather = mainViewModel.currWeather.value.data!!,
-                isFavorite = mainViewModel::isFavorite,
-                onInsertItem = mainViewModel::onInsertItem,
-                onDeleteItem = mainViewModel::onDeleteItem,
-                modifier = modifier
-            )
+            mainViewModel.currWeather.value.data?.let { weather ->
+                DetailsScreen(
+                    weather = weather,
+                    isFavorite = mainViewModel::isFavorite,
+                    onInsertItem = mainViewModel::onInsertItem,
+                    onDeleteItem = mainViewModel::onDeleteItem,
+                    modifier = modifier
+                )
+            }
         }
     }
 }

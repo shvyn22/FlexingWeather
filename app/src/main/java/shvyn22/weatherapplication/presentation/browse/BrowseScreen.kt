@@ -46,9 +46,7 @@ fun BrowseScreen(
             CircularProgressIndicator(
                 modifier = Modifier.align(Alignment.Center)
             )
-        }
-        else if (currWeather.value is Resource.Success)
-        {
+        } else if (currWeather.value is Resource.Success) {
             navController.navigate(Routes.Details.route)
         }
         Column {

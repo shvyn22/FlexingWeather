@@ -40,7 +40,12 @@ object AppModule {
     @Singleton
     @Provides
     fun provideAppDatabase(app: Application): AppDatabase =
-        Room.databaseBuilder(app, AppDatabase::class.java, "app_database")
+        Room
+            .databaseBuilder(
+                app,
+                AppDatabase::class.java,
+                "app_database"
+            )
             .build()
 
     @Singleton

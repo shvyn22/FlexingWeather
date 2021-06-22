@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Ya/codim/android/androidapps/Compose samples/WeatherApplication/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19444444444444445" />
+        <entry key="..\:/Ya/codim/android/androidapps/Compose samples/WeatherApplication/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.19444444444444445" />
         <entry key="..\:/Ya/codim/androidapps/WeatherApplication/app/src/main/res/layout/activity_main.xml" value="0.14764492753623187" />
       </map>
     </option>

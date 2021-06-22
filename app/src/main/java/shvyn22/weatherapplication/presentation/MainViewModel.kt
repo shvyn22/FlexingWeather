@@ -1,7 +1,8 @@
 package shvyn22.weatherapplication.presentation
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
@@ -11,14 +12,13 @@ import shvyn22.weatherapplication.data.local.model.Weather
 import shvyn22.weatherapplication.data.preferences.PreferencesManager
 import shvyn22.weatherapplication.repository.Repository
 import shvyn22.weatherapplication.util.Resource
-import shvyn22.weatherapplication.util.fromWeatherToLocation
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val repository: Repository,
     private val preferences: PreferencesManager
-): ViewModel() {
+) : ViewModel() {
 
     val prefs = preferences.preferencesFlow
 
@@ -42,8 +42,9 @@ class MainViewModel @Inject constructor(
     }
 
     fun getWeather(id: Int) = viewModelScope.launch {
-        currWeather.value = Resource.Loading()
-        currWeather.value = Resource.Success(repository.getWeather(id))
+        repository.getWeather(id).collect {
+            currWeather.value = it
+        }
     }
 
     fun resetWeather() = viewModelScope.launch {
@@ -57,8 +58,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun onInsertItem(item: Weather) = viewModelScope.launch {
-        val location = fromWeatherToLocation(item)
-        repository.insert(location)
+        repository.insert(item)
     }
 
     fun onDeleteItem(id: Int) = viewModelScope.launch {

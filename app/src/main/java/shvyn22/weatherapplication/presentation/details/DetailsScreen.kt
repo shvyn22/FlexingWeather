@@ -1,7 +1,10 @@
 package shvyn22.weatherapplication.presentation.details
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
@@ -9,17 +12,21 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Air
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Thermostat
 import androidx.compose.material.icons.outlined.WbSunny
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.google.accompanist.glide.GlideImage
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import shvyn22.weatherapplication.data.local.model.Weather
 import shvyn22.weatherapplication.presentation.ui.components.WeatherItem
 import shvyn22.weatherapplication.util.Constants.ICON_URL
@@ -67,7 +74,7 @@ fun DetailsScreen(
 
         Icon(
             imageVector = if (isFavoriteState.value) Icons.Filled.Favorite
-                else Icons.Filled.FavoriteBorder,
+            else Icons.Filled.FavoriteBorder,
             contentDescription = null,
             modifier = Modifier
                 .constrainAs(iconFavorite) {
@@ -125,6 +132,7 @@ fun DetailsScreen(
                     bottom.linkTo(iconSun.bottom)
                     start.linkTo(iconSun.end)
                 }
+                .padding(bottom = 10.dp)
         )
 
         Card(
@@ -305,7 +313,8 @@ fun DetailsScreen(
                     item = item,
                     onClick = {
                         currItem.value = item
-                    })
+                    }
+                )
             }
         }
     }

@@ -11,15 +11,15 @@ interface ApiInterface {
     @GET("search/")
     suspend fun searchByName(
         @Query("query") query: String
-    ) : List<Location>
+    ): List<Location>
 
     @GET("search/")
     suspend fun searchByLattLong(
-        @Query("lattlong") lattlong: String
-    ) : List<Location>
+        @Query("lattlong") lattLong: String
+    ): List<Location>
 
     @GET("{id}")
     suspend fun getWeather(
         @Path("id") id: Int
-    ) : Weather
+    ): Weather
 }
