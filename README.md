@@ -33,7 +33,7 @@ This application is based on [MetaWeatherAPI](https://www.metaweather.com/api/).
 ```
 MIT License
 
-Copyright (c) 2021 Shvyndia Andrii
+Copyright (c) 2022 Shvyndia Andrii
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

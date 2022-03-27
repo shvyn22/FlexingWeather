@@ -118,7 +118,7 @@ fun DetailsScreen(
                         .padding(bottom = 10.dp, end = 5.dp)
                 )
                 Text(
-                    text = "${weather.data.sunRise.toStringTime()} ->" +
+                    text = "${weather.data.sunRise.toStringTime()} -" +
                         " ${weather.data.sunSet.toStringTime()}",
                     style = MaterialTheme.typography.subtitle2,
                     textAlign = TextAlign.Start,
