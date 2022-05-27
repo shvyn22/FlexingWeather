@@ -18,12 +18,30 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import shvyn22.flexingweather.R
 import shvyn22.flexingweather.data.local.model.Location
+import shvyn22.flexingweather.presentation.MainViewModel
 import shvyn22.flexingweather.presentation.ui.components.LocationItem
 import shvyn22.flexingweather.util.Resource
 
 @ExperimentalComposeUiApi
 @Composable
 fun BrowseScreen(
+    viewModel: MainViewModel,
+    onNavigateToDetails: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val locations = viewModel.locations.collectAsState()
+
+    BrowseContent(
+        locations = locations.value,
+        searchItems = viewModel::searchItems,
+        onNavigateToDetails = onNavigateToDetails,
+        modifier = modifier
+    )
+}
+
+@ExperimentalComposeUiApi
+@Composable
+fun BrowseContent(
     locations: Resource<List<Location>>,
     searchItems: (String) -> Unit,
     onNavigateToDetails: (Int) -> Unit,
@@ -49,7 +67,9 @@ fun BrowseScreen(
                     .fillMaxWidth()
                     .padding(5.dp),
                 label = {
-                    Text(text = stringResource(id = R.string.text_search_placeholder))
+                    Text(
+                        text = stringResource(id = R.string.text_search_placeholder)
+                    )
                 },
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Search
@@ -79,7 +99,9 @@ fun BrowseScreen(
                     CircularProgressIndicator()
                 }
                 is Resource.Error -> {
-                    Text(text = stringResource(id = R.string.text_not_found))
+                    Text(
+                        text = stringResource(id = R.string.text_not_found)
+                    )
                 }
                 is Resource.Idle -> Unit
             }

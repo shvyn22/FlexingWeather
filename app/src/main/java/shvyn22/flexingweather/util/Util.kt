@@ -17,3 +17,6 @@ fun String.normaliseDate(isShort: Boolean): String {
 
     return if (isShort) "$day.$month" else "$day.$month.$year"
 }
+
+fun getImageUrl(stateAbbr: String): String =
+    "$ICON_URL$stateAbbr.png"

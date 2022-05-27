@@ -5,14 +5,14 @@ This application is based on [MetaWeatherAPI](https://www.metaweather.com/api/).
 ## Screenshots
 ### Light mode
 <p float="left">
-  <img src="screenshots/screen1.png" width=200/>
-  <img src="screenshots/screen2.png" width=200/> 
+  <img src="assets/screen1.png" width=200/>
+  <img src="assets/screen2.png" width=200/> 
 </p>
 
 ### Dark mode
 <p float="left">
-  <img src="screenshots/screen1-dm.png" width=200/>
-  <img src="screenshots/screen2-dm.png" width=200/>
+  <img src="assets/screen1-dm.png" width=200/>
+  <img src="assets/screen2-dm.png" width=200/>
 </p>
 
 ## Tech stack and concepts

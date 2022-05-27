@@ -1,26 +1,26 @@
 package shvyn22.flexingweather.repository
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
-import shvyn22.flexingweather.api.ApiInterface
 import shvyn22.flexingweather.data.local.dao.LocationDao
 import shvyn22.flexingweather.data.local.model.Weather
+import shvyn22.flexingweather.data.remote.api.ApiService
+import shvyn22.flexingweather.data.util.fromWeatherToLocation
 import shvyn22.flexingweather.util.Resource
-import shvyn22.flexingweather.util.fromWeatherToLocation
-import javax.inject.Inject
 
-class RepositoryImpl @Inject constructor(
-    private val api: ApiInterface,
+class RepositoryImpl(
+    private val api: ApiService,
     private val locationDao: LocationDao
 ) : Repository {
 
-    override suspend fun searchByName(query: String) = flow {
+    override suspend fun searchLocationsByName(query: String) = flow {
         emit(Resource.Loading())
         try {
-            val response = api.searchByName(query)
-            if (response.isEmpty()) emit(Resource.Error(""))
-            else emit(Resource.Success(response))
+            val response = api.searchLocationsByName(query)
+            if (response.isEmpty())
+                emit(Resource.Error(""))
+            else
+                emit(Resource.Success(response))
         } catch (e: Exception) {
             emit(Resource.Error(e.localizedMessage ?: ""))
         }
@@ -36,18 +36,18 @@ class RepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getItems() = flow {
-        locationDao.getItems().collect {
+    override fun getFavoriteLocations() = flow {
+        locationDao.getFavoriteLocations().collect {
             emit(Resource.Success(it))
         }
     }
 
-    override fun isFavorite(id: Int): Flow<Boolean> =
-        locationDao.isFavorite(id)
+    override fun isLocationFavorite(id: Int): Flow<Boolean> =
+        locationDao.isLocationFavorite(id)
 
-    override suspend fun insert(item: Weather) =
-        locationDao.insert(fromWeatherToLocation(item))
+    override suspend fun insertFavoriteLocation(item: Weather) =
+        locationDao.insertFavoriteLocation(fromWeatherToLocation(item))
 
-    override suspend fun delete(id: Int) =
-        locationDao.delete(id)
+    override suspend fun deleteFavoriteLocation(id: Int) =
+        locationDao.deleteFavoriteLocation(id)
 }

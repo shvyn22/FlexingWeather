@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import shvyn22.flexingweather.R
 import shvyn22.flexingweather.data.local.model.Weather
+import shvyn22.flexingweather.presentation.MainViewModel
 import shvyn22.flexingweather.presentation.ui.components.WeatherCard
 import shvyn22.flexingweather.presentation.ui.components.WeatherItem
 import shvyn22.flexingweather.util.Resource
@@ -29,10 +30,31 @@ import shvyn22.flexingweather.util.toStringTime
 
 @Composable
 fun DetailsScreen(
+    weatherId: Int,
+    viewModel: MainViewModel,
+    modifier: Modifier = Modifier
+) {
+    viewModel.getWeather(weatherId)
+
+    val weather = viewModel.weather.collectAsState()
+    val isLocationFavorite = viewModel.isLocationFavorite(weatherId)
+        .collectAsState(initial = false)
+
+    DetailsContent(
+        weather = weather.value,
+        isLocationFavorite = isLocationFavorite.value,
+        onInsertFavoriteLocation = viewModel::insertFavoriteLocation,
+        onDeleteFavoriteLocation = viewModel::deleteFavoriteLocation,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun DetailsContent(
     weather: Resource<Weather>,
-    isFavorite: Boolean,
-    onInsertItem: (Weather) -> Unit,
-    onDeleteItem: (Int) -> Unit,
+    isLocationFavorite: Boolean,
+    onInsertFavoriteLocation: (Weather) -> Unit,
+    onDeleteFavoriteLocation: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     ConstraintLayout(
@@ -68,7 +90,7 @@ fun DetailsScreen(
                 )
 
                 Icon(
-                    imageVector = if (isFavorite) Icons.Filled.Favorite
+                    imageVector = if (isLocationFavorite) Icons.Filled.Favorite
                     else Icons.Filled.FavoriteBorder,
                     contentDescription = null,
                     modifier = Modifier
@@ -78,8 +100,8 @@ fun DetailsScreen(
                             end.linkTo(parent.end)
                         }
                         .clickable {
-                            if (isFavorite) onDeleteItem(weather.data.woeId)
-                            else onInsertItem(weather.data)
+                            if (isLocationFavorite) onDeleteFavoriteLocation(weather.data.woeId)
+                            else onInsertFavoriteLocation(weather.data)
                         }
                 )
 

@@ -4,15 +4,13 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 
 @Composable
-fun WeatherTheme(
-    isDarkMode: Boolean?,
+fun AppTheme(
+    isDarkTheme: Boolean,
     content: @Composable () -> Unit
 ) {
-    val colors = if (isDarkMode == true) DarkColors else LightColors
-
     MaterialTheme(
-        colors = colors,
-        shapes = WeatherShapes,
+        colors = if (isDarkTheme) DarkColors else LightColors,
+        shapes = AppShapes,
         content = content
     )
 }

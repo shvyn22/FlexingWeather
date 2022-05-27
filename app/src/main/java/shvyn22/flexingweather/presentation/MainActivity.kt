@@ -7,26 +7,26 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.ExperimentalComposeUiApi
 import dagger.hilt.android.AndroidEntryPoint
-import shvyn22.flexingweather.presentation.ui.theme.WeatherTheme
+import shvyn22.flexingweather.presentation.main.MainScreen
+import shvyn22.flexingweather.presentation.ui.theme.AppTheme
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()
 
-    @ExperimentalComposeUiApi
+    @OptIn(ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            val nightMode = viewModel.nightMode.collectAsState(initial = false)
+            val theme = viewModel.isDarkTheme.collectAsState(initial = false)
 
-            WeatherTheme(
-                isDarkMode = nightMode.value
+            AppTheme(
+                isDarkTheme = theme.value
             ) {
                 MainScreen(
-                    viewModel = viewModel,
-                    darkMode = nightMode.value
+                    viewModel = viewModel
                 )
             }
         }

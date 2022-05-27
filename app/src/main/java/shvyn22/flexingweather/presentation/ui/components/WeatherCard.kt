@@ -34,7 +34,8 @@ fun WeatherCard(
             .padding(bottom = 5.dp)
     ) {
         ConstraintLayout(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier
+                .padding(16.dp)
         ) {
             val (
                 date,

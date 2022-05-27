@@ -1,26 +1,26 @@
 buildscript {
     ext {
         // Kotlin
-        kotlinVersion = "1.5.31"
+        kotlinVersion = "1.6.10"
         ktxVersion = "1.7.0"
 
         // Activity
-        activityVersion = "1.4.0"
+        activityVersion = "1.6.0-alpha04"
 
         // AppCompat
-        appCompatVersion = "1.4.0"
+        appCompatVersion = "1.4.1"
 
         // UI
-        materialVersion = "1.6.0-alpha01"
+        materialVersion = "1.7.0-alpha01"
 
         // Lifecycle
-        lifecycleVersion = "2.4.0"
+        lifecycleVersion = "2.4.1"
 
         // Room
-        roomVersion = "2.4.0"
+        roomVersion = "2.4.2"
 
         // Coroutines
-        coroutinesVersion = "1.5.0"
+        coroutinesVersion = "1.6.1"
 
         // Hilt
         hiltAndroidXVersion = "1.0.0-alpha03"
@@ -30,7 +30,7 @@ buildscript {
         dataStoreVersion = "1.0.0"
 
         // Retrofit
-        retrofitVersion = "2.8.1"
+        retrofitVersion = "2.9.0"
 
         // Coil
         koilVersion = "1.4.0"
@@ -39,10 +39,9 @@ buildscript {
         gradleVersion = "7.0.2"
 
         // Compose
-        composeVersion = "1.0.5"
-        navComposeVersion = "2.4.0-beta02"
-        constraintComposeVersion = "1.0.0-rc02"
-        hiltNavigationCompose = "1.0.0-rc01"
+        composeVersion = "1.1.1"
+        navComposeVersion = "2.5.0-rc01"
+        constraintComposeVersion = "1.1.0-alpha01"
     }
     repositories {
         google()

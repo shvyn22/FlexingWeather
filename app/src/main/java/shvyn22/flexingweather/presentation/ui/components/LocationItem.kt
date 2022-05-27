@@ -33,7 +33,8 @@ fun LocationItem(
             Text(
                 text = item.title,
                 style = MaterialTheme.typography.body1,
-                modifier = Modifier.padding(bottom = 5.dp)
+                modifier = Modifier
+                    .padding(bottom = 5.dp)
             )
             Text(
                 text = item.lattLong,

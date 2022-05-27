@@ -3,10 +3,7 @@ package shvyn22.flexingweather.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import shvyn22.flexingweather.data.local.model.Location
 import shvyn22.flexingweather.data.local.model.Weather
@@ -25,7 +22,8 @@ class MainViewModel @Inject constructor(
         searchItems("")
     }
 
-    val nightMode = preferences.nightMode
+    val isDarkTheme = preferences.isDarkTheme
+        .stateIn(viewModelScope, SharingStarted.Lazily, false)
 
     private val _locations = MutableStateFlow<Resource<List<Location>>>(Resource.Idle())
     val locations get() = _locations.asStateFlow()
@@ -33,14 +31,14 @@ class MainViewModel @Inject constructor(
     private val _weather = MutableStateFlow<Resource<Weather>>(Resource.Loading())
     val weather get() = _weather.asStateFlow()
 
-    fun searchItems(newQuery: String) {
+    fun searchItems(query: String) {
         viewModelScope.launch {
-            if (newQuery.isEmpty()) {
-                repository.getItems().collect {
+            if (query.isEmpty()) {
+                repository.getFavoriteLocations().collect {
                     _locations.value = it
                 }
             } else {
-                repository.searchByName(newQuery).collect {
+                repository.searchLocationsByName(query).collect {
                     _locations.value = it
                 }
             }
@@ -55,27 +53,27 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun isFavorite(id: Int) = flow {
-        repository.isFavorite(id).collect {
+    fun isLocationFavorite(id: Int) = flow {
+        repository.isLocationFavorite(id).collect {
             emit(it)
         }
     }
 
-    fun onInsertItem(item: Weather) {
+    fun insertFavoriteLocation(item: Weather) {
         viewModelScope.launch {
-            repository.insert(item)
+            repository.insertFavoriteLocation(item)
         }
     }
 
-    fun onDeleteItem(id: Int) {
+    fun deleteFavoriteLocation(id: Int) {
         viewModelScope.launch {
-            repository.delete(id)
+            repository.deleteFavoriteLocation(id)
         }
     }
 
-    fun onToggleMode(newValue: Boolean) {
+    fun editThemePreferences(newThemeValue: Boolean) {
         viewModelScope.launch {
-            preferences.editNightMode(newValue)
+            preferences.editThemePreferences(newThemeValue)
         }
     }
 }

@@ -1,4 +1,4 @@
-package shvyn22.flexingweather.util
+package shvyn22.flexingweather.data.util
 
 import shvyn22.flexingweather.data.local.model.Location
 import shvyn22.flexingweather.data.local.model.Weather

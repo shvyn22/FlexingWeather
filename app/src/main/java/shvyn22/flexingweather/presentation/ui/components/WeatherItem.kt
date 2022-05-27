@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import shvyn22.flexingweather.data.local.model.Weather
-import shvyn22.flexingweather.util.ICON_URL
+import shvyn22.flexingweather.util.getImageUrl
 import shvyn22.flexingweather.util.normaliseDate
 
 @Composable
@@ -25,6 +25,7 @@ fun WeatherItem(
             .padding(top = 10.dp, bottom = 10.dp, end = 10.dp)
     ) {
         Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .padding(5.dp)
                 .clickable { onClick() }
@@ -34,18 +35,16 @@ fun WeatherItem(
                 style = MaterialTheme.typography.body1,
                 modifier = Modifier
                     .padding(bottom = 5.dp)
-                    .align(Alignment.CenterHorizontally)
             )
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
                     .padding(bottom = 5.dp)
             ) {
                 Image(
                     painter = rememberImagePainter(
-                        data = ICON_URL + "${item.stateAbbr}.png",
+                        data = getImageUrl(item.stateAbbr),
                         builder = {
                             crossfade(true)
                         }
@@ -68,8 +67,7 @@ fun WeatherItem(
                     item.minTemp,
                     item.maxTemp
                 ),
-                style = MaterialTheme.typography.subtitle2,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                style = MaterialTheme.typography.subtitle2
             )
         }
     }
